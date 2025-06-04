@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 
 const QuantumWaveField = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +20,14 @@ const QuantumWaveField = () => {
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
+    // Mouse tracking
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     let animationId: number;
     let time = 0;
@@ -37,22 +46,28 @@ const QuantumWaveField = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       time += 1;
+      const mouseInfluence = 0.0002;
 
       // Draw quantum wave interference patterns
       waves.forEach((wave, waveIndex) => {
         ctx.strokeStyle = wave.color;
         ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.3;
+        ctx.globalAlpha = 0.2; // Reduced from 0.3 to 0.2
 
-        // Horizontal waves
+        // Horizontal waves with mouse influence
         for (let y = 0; y < canvas.height; y += 60) {
           ctx.beginPath();
           for (let x = 0; x < canvas.width; x += 2) {
+            const distanceToMouse = Math.sqrt(
+              Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
+            );
+            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 15;
+            
             const waveY = y + wave.amplitude * Math.sin(
               wave.frequency * x + 
               wave.speed * time + 
               wave.phase
-            );
+            ) + mouseEffect * Math.sin(time * 0.02);
             
             if (x === 0) {
               ctx.moveTo(x, waveY);
@@ -63,16 +78,21 @@ const QuantumWaveField = () => {
           ctx.stroke();
         }
 
-        // Vertical waves for interference
-        ctx.globalAlpha = 0.2;
+        // Vertical waves for interference with mouse influence
+        ctx.globalAlpha = 0.1; // Reduced from 0.2 to 0.1
         for (let x = 0; x < canvas.width; x += 80) {
           ctx.beginPath();
           for (let y = 0; y < canvas.height; y += 2) {
+            const distanceToMouse = Math.sqrt(
+              Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
+            );
+            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 10;
+            
             const waveX = x + wave.amplitude * 0.7 * Math.sin(
               wave.frequency * y + 
               wave.speed * time + 
               wave.phase + Math.PI / 4
-            );
+            ) + mouseEffect * Math.cos(time * 0.02);
             
             if (y === 0) {
               ctx.moveTo(waveX, y);
@@ -84,11 +104,16 @@ const QuantumWaveField = () => {
         }
       });
 
-      // Add quantum interference dots at intersections
-      ctx.globalAlpha = 0.6;
+      // Add quantum interference dots at intersections with mouse influence
+      ctx.globalAlpha = 0.4; // Reduced from 0.6 to 0.4
       for (let x = 0; x < canvas.width; x += 120) {
         for (let y = 0; y < canvas.height; y += 120) {
-          const intensity = Math.sin(time * 0.01 + x * 0.01 + y * 0.01);
+          const distanceToMouse = Math.sqrt(
+            Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
+          );
+          const mouseProximity = Math.exp(-distanceToMouse * 0.0008);
+          
+          const intensity = Math.sin(time * 0.01 + x * 0.01 + y * 0.01) + mouseProximity;
           if (intensity > 0.5) {
             const size = (intensity - 0.5) * 4;
             ctx.beginPath();
@@ -107,6 +132,7 @@ const QuantumWaveField = () => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);
     };
   }, []);
@@ -119,9 +145,9 @@ const QuantumWaveField = () => {
         style={{ zIndex: 1 }}
       />
       
-      {/* Subtle gradient overlay */}
+      {/* Reduced gradient overlay opacity */}
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         style={{
           background: `
             radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),

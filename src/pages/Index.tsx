@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import QuantumWaveField from '../components/QuantumWaveField';
 import SubscriptionForm from '../components/SubscriptionForm';
@@ -18,9 +17,9 @@ const Index = () => {
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 text-center">
         
-        {/* Main Title */}
+        {/* Main Title with subtle iridescent effect */}
         <div className={`transform transition-all duration-2000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider mb-6 bg-gradient-to-r from-quantum-cyan via-quantum-glow to-quantum-violet bg-clip-text text-transparent animate-gradient-shift">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider mb-6 bg-gradient-to-r from-gray-200 via-white to-gray-300 bg-clip-text text-transparent animate-subtle-shift">
             <span className="block">BIO HACKING</span>
             <span className="block">CUÁNTICO</span>
           </h1>

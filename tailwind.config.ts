@@ -119,6 +119,24 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				'subtle-shift': {
+					'0%, 100%': { 
+						backgroundPosition: '0% 50%',
+						filter: 'hue-rotate(0deg)'
+					},
+					'25%': {
+						backgroundPosition: '25% 25%',
+						filter: 'hue-rotate(15deg)'
+					},
+					'50%': { 
+						backgroundPosition: '100% 50%',
+						filter: 'hue-rotate(30deg)'
+					},
+					'75%': {
+						backgroundPosition: '75% 75%',
+						filter: 'hue-rotate(15deg)'
+					}
 				}
 			},
 			animation: {
@@ -127,7 +145,8 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'gradient-shift': 'gradient-shift 4s ease-in-out infinite',
 				'typing': 'typing 3.5s steps(40, end)',
-				'fade-in-up': 'fade-in-up 1s ease-out'
+				'fade-in-up': 'fade-in-up 1s ease-out',
+				'subtle-shift': 'subtle-shift 8s ease-in-out infinite'
 			},
 			backgroundSize: {
 				'300%': '300% 300%'
