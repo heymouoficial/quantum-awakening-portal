@@ -77,6 +77,9 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			opacity: {
+				'5': '0.05'
+			},
 			keyframes: {
 				'accordion-down': {
 					from: {

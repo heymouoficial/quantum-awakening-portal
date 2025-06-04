@@ -42,26 +42,26 @@ const QuantumWaveField = () => {
 
     const animate = () => {
       // Clear canvas with dark background
-      ctx.fillStyle = 'rgba(15, 15, 29, 0.1)';
+      ctx.fillStyle = 'rgba(15, 15, 29, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       time += 1;
-      const mouseInfluence = 0.0002;
+      const mouseInfluence = 0.001; // Increased from 0.0002 to make mouse effect more visible
 
       // Draw quantum wave interference patterns
       waves.forEach((wave, waveIndex) => {
         ctx.strokeStyle = wave.color;
         ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.2; // Reduced from 0.3 to 0.2
+        ctx.globalAlpha = 0.05; // Reduced from 0.2 to 0.05
 
-        // Horizontal waves with mouse influence
+        // Horizontal waves with stronger mouse influence
         for (let y = 0; y < canvas.height; y += 60) {
           ctx.beginPath();
           for (let x = 0; x < canvas.width; x += 2) {
             const distanceToMouse = Math.sqrt(
               Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
             );
-            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 15;
+            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 50; // Increased from 15 to 50
             
             const waveY = y + wave.amplitude * Math.sin(
               wave.frequency * x + 
@@ -78,15 +78,15 @@ const QuantumWaveField = () => {
           ctx.stroke();
         }
 
-        // Vertical waves for interference with mouse influence
-        ctx.globalAlpha = 0.1; // Reduced from 0.2 to 0.1
+        // Vertical waves for interference with stronger mouse influence
+        ctx.globalAlpha = 0.03; // Reduced from 0.1 to 0.03
         for (let x = 0; x < canvas.width; x += 80) {
           ctx.beginPath();
           for (let y = 0; y < canvas.height; y += 2) {
             const distanceToMouse = Math.sqrt(
               Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
             );
-            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 10;
+            const mouseEffect = Math.exp(-distanceToMouse * mouseInfluence) * 30; // Increased from 10 to 30
             
             const waveX = x + wave.amplitude * 0.7 * Math.sin(
               wave.frequency * y + 
@@ -104,18 +104,18 @@ const QuantumWaveField = () => {
         }
       });
 
-      // Add quantum interference dots at intersections with mouse influence
-      ctx.globalAlpha = 0.4; // Reduced from 0.6 to 0.4
+      // Add quantum interference dots at intersections with stronger mouse influence
+      ctx.globalAlpha = 0.08; // Reduced from 0.4 to 0.08
       for (let x = 0; x < canvas.width; x += 120) {
         for (let y = 0; y < canvas.height; y += 120) {
           const distanceToMouse = Math.sqrt(
             Math.pow(x - mouseRef.current.x, 2) + Math.pow(y - mouseRef.current.y, 2)
           );
-          const mouseProximity = Math.exp(-distanceToMouse * 0.0008);
+          const mouseProximity = Math.exp(-distanceToMouse * 0.002); // Increased from 0.0008 to make more responsive
           
           const intensity = Math.sin(time * 0.01 + x * 0.01 + y * 0.01) + mouseProximity;
-          if (intensity > 0.5) {
-            const size = (intensity - 0.5) * 4;
+          if (intensity > 0.3) { // Lowered threshold from 0.5 to 0.3 to make dots appear more frequently
+            const size = (intensity - 0.3) * 6; // Adjusted for new threshold
             ctx.beginPath();
             ctx.arc(x, y, size, 0, Math.PI * 2);
             ctx.fillStyle = '#3FFFA8';
@@ -145,14 +145,14 @@ const QuantumWaveField = () => {
         style={{ zIndex: 1 }}
       />
       
-      {/* Reduced gradient overlay opacity */}
+      {/* Reduced gradient overlay opacity to 5% */}
       <div 
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-5"
         style={{
           background: `
-            radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 70% 60%, rgba(63, 255, 168, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)
+            radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 70% 60%, rgba(63, 255, 168, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%)
           `,
           zIndex: 2
         }}
