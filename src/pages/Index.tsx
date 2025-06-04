@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import QuantumBackground from '../components/QuantumBackground';
+import QuantumWaveField from '../components/QuantumWaveField';
 import SubscriptionForm from '../components/SubscriptionForm';
 
 const Index = () => {
@@ -12,17 +12,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-quantum-dark relative overflow-hidden font-sora">
-      {/* Quantum Particle Background */}
-      <QuantumBackground />
+      {/* Quantum Wave Field Background */}
+      <QuantumWaveField />
       
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 text-center">
         
         {/* Main Title */}
         <div className={`transform transition-all duration-2000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-wider mb-6 animate-glow-pulse">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-wider mb-6 bg-gradient-to-r from-quantum-cyan via-quantum-glow to-quantum-violet bg-clip-text text-transparent animate-gradient-shift">
             <span className="block">BIO HACKING</span>
-            <span className="block text-quantum-glow">CUÁNTICO</span>
+            <span className="block">CUÁNTICO</span>
           </h1>
         </div>
 
@@ -49,10 +49,10 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Floating Elements */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-quantum-glow rounded-full animate-float opacity-60"></div>
-        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-quantum-violet rounded-full animate-float opacity-40" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-quantum-cyan rounded-full animate-float opacity-50" style={{animationDelay: '4s'}}></div>
+        {/* Floating Elements - Reduced and more subtle */}
+        <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-quantum-glow/40 rounded-full animate-float opacity-30"></div>
+        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-quantum-violet/40 rounded-full animate-float opacity-25" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-quantum-cyan/40 rounded-full animate-float opacity-35" style={{animationDelay: '4s'}}></div>
       </div>
     </div>
   );
