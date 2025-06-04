@@ -1,11 +1,58 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from 'react';
+import QuantumBackground from '../components/QuantumBackground';
+import SubscriptionForm from '../components/SubscriptionForm';
 
 const Index = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-quantum-dark relative overflow-hidden font-sora">
+      {/* Quantum Particle Background */}
+      <QuantumBackground />
+      
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 text-center">
+        
+        {/* Main Title */}
+        <div className={`transform transition-all duration-2000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-wider mb-6 animate-glow-pulse">
+            <span className="block">BIO HACKING</span>
+            <span className="block text-quantum-glow">CUÁNTICO</span>
+          </h1>
+        </div>
+
+        {/* Subtitle with typing effect */}
+        <div className={`transform transition-all duration-1500 delay-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 max-w-4xl leading-relaxed font-light">
+            <span className="inline-block overflow-hidden whitespace-nowrap border-r-2 border-quantum-glow animate-typing">
+              Despierta tu potencial. Sintoniza con tu frecuencia. Rediseña tu biología.
+            </span>
+          </p>
+        </div>
+
+        {/* Subscription Form */}
+        <div className={`transform transition-all duration-1500 delay-1500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <SubscriptionForm />
+        </div>
+
+        {/* Footer Text */}
+        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1500 delay-2000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <p className="text-gray-500 text-sm md:text-base max-w-2xl px-4 leading-relaxed">
+            Estamos co-creando la nueva frontera del ser humano. 
+            <br className="hidden md:block" />
+            Regístrate para recibir el primer pulso.
+          </p>
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-quantum-glow rounded-full animate-float opacity-60"></div>
+        <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-quantum-violet rounded-full animate-float opacity-40" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-quantum-cyan rounded-full animate-float opacity-50" style={{animationDelay: '4s'}}></div>
       </div>
     </div>
   );

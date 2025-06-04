@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'sora': ['Sora', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,6 +65,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				quantum: {
+					dark: '#0F0F1D',
+					glow: '#3FFFA8',
+					violet: '#8B5CF6',
+					cyan: '#06B6D4'
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,58 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
+				'particle-float': {
+					'0%, 100%': { 
+						transform: 'translate3d(0, 0, 0) rotate(0deg)',
+						opacity: '0.7'
+					},
+					'33%': { 
+						transform: 'translate3d(30px, -30px, 0) rotate(120deg)',
+						opacity: '1'
+					},
+					'66%': { 
+						transform: 'translate3d(-20px, 20px, 0) rotate(240deg)',
+						opacity: '0.8'
+					}
+				},
+				'glow-pulse': {
+					'0%, 100%': { 
+						textShadow: '0 0 5px #3FFFA8, 0 0 10px #3FFFA8, 0 0 15px #3FFFA8',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						textShadow: '0 0 10px #3FFFA8, 0 0 20px #3FFFA8, 0 0 30px #3FFFA8',
+						transform: 'scale(1.02)'
+					}
+				},
+				'typing': {
+					'from': { width: '0' },
+					'to': { width: '100%' }
+				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'particle-float': 'particle-float 8s ease-in-out infinite',
+				'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+				'typing': 'typing 3.5s steps(40, end)',
+				'fade-in-up': 'fade-in-up 1s ease-out'
 			}
 		}
 	},
